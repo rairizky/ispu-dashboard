@@ -16,6 +16,7 @@ class APIModelController extends Controller
         $co = $request->get('co');
         $o3 = $request->get('o3');
         $no2 = $request->get('no2');
+        $category_max = $request->get('category_max');
 
         $url = 'http://localhost:5000/api/classification/predict';
 
@@ -32,7 +33,7 @@ class APIModelController extends Controller
 
         $data = json_decode($response->getBody(), true);
 
-        $category = Category::with('category_actions')->where('name', $data["category"]) ->first();
+        $category = Category::with('category_actions')->where('name',  $category_max) ->first();
 
         return response()->json([
             'status' => true,
